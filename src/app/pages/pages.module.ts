@@ -5,17 +5,20 @@ import { AppRoutingModule } from '../app-routing.module';
 //components
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PagesComponent} from "./pages.component";
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    PagesComponent
+    PagesComponent,
+    AccountSettingsComponent
   ],
   exports: [
     DashboardComponent,
-    PagesComponent
+    PagesComponent,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
