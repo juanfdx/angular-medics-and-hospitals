@@ -9,10 +9,6 @@ import {PageError404Component} from "./page-error404/page-error404.component";
 
 const routes: Routes = [
 
-  //path: '/dashboard'  PagesRoutingModule
-  //path: '/login'  AuthRoutingModule
-  //path: '/register'  AuthRoutingModule
-
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', component: PageError404Component }
 ];
