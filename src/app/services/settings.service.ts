@@ -13,7 +13,11 @@ export class SettingsService {
     this.linkTheme?.setAttribute('href', url);
   }
 
-  //Services:
+
+//SERVICES:
+/*===========================================================
+  CHANGE THEME
+============================================================*/
   changeTheme(theme: string): void {
 
     const url = `./assets/css/colors/${theme}.css`; 
@@ -26,6 +30,9 @@ export class SettingsService {
   }
 
 
+/*===========================================================
+  CHECK CURRENT THEM
+============================================================*/
   checkCurrentThem(): void {
 
     //seleccionamos todos los elementos a por su clase en comun "selector"
