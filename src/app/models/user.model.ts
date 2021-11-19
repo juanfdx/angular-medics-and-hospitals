@@ -16,7 +16,7 @@ export class User {
 
   ) {}
 
-  //creamos el getter para controlar si existe o no la imagen
+  //GETTER - para controlar si existe o no la imagen
   public get imageUrl() : string {
     
     if (this.image) {
@@ -24,6 +24,13 @@ export class User {
     }
     return `${ base_url }/upload/users/no-image`;
   }
+
+
+  //SETTER
+  public set _id(id : string) {
+    this.id = id;
+  }
+  
   
 
 

@@ -25,7 +25,7 @@ export class FileUploadService {
 ============================================================*/
   uploadImage( type: string, id: string, image: any ): Observable<any> {
 
-    //tratamos la imagen asubir
+    //tratamos la imagen a subir
     const data = new FormData();
     data.append('image', image);
 

@@ -9,7 +9,7 @@ export class SettingsService {
 
   constructor() { 
     //si hay tema lo asigna sino usa el que esta por defecto
-    const url =  localStorage.getItem('theme') || './assets/css/colors/blue-dark.css';
+    const url =  localStorage.getItem('theme') || './assets/css/colors/purple-dark.css';
     this.linkTheme?.setAttribute('href', url);
   }
 

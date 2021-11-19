@@ -7,10 +7,11 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { PageError404Component } from './page-error404/page-error404.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    PageError404Component
+    PageError404Component,
   ],
   imports: [
     BrowserModule,

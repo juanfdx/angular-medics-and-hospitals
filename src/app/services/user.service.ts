@@ -9,6 +9,7 @@ import { RegisterForm } from '../interfaces/register-form.interface';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { ProfileForm } from '../interfaces/profile-form.interface';
+import { GetUsers } from '../interfaces/get-users.interface';
 
 
 @Injectable({
@@ -28,6 +29,7 @@ export class UserService {
 
 
 
+  //GETTERS:
   public get token() : string {
     return localStorage.getItem('token') || '';
   }
@@ -35,6 +37,16 @@ export class UserService {
   public get userId() : string {
     return this.user.id || '';
   }
+
+  
+  public get headers() : object {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
+  }
+  
   
   
 //SERVICES:
@@ -43,26 +55,24 @@ export class UserService {
 ============================================================*/
   validateToken(): Observable<boolean> {
 
-    return this.http.get(`${this.base_url}/login/renew`, {
-      headers: {
-        'x-token': this.token
-      }
-    }).pipe(
-      map( (res:any) => {
-        //destructuramos la res(es un user), para usar las propiedades en la instancia
-        const { name, lastName, email, role, image = '', _id } = res.user;
+    return this.http.get(`${this.base_url}/login/renew`, this.headers)
 
-        //creamos una instancia de usuario, y tendremos el usuario disponible en toda la app
-        this.user = new User(name, lastName, email, '', role, image, _id);
-        //tambien podremos usar los metodos que tenga la clase user y siempre que
-        //estemos en una pagina autenticada dispondremos de la informacion del user
-        
-        localStorage.setItem('token', res.token);
+        .pipe(
+          map( (res:any) => {
+            //destructuramos la res(es un user), para usar las propiedades en la instancia
+            const { name, lastName, email, role, image = '', _id } = res.user;
 
-        return true;
-      }),
-      catchError( error => of(false))
-    )
+            //creamos una instancia de usuario, y tendremos el usuario disponible en toda la app
+            this.user = new User(name, lastName, email, '', role, image, _id);
+            //tambien podremos usar los metodos que tenga la clase user y siempre que
+            //estemos en una pagina autenticada dispondremos de la informacion del user
+            
+            localStorage.setItem('token', res.token);
+
+            return true;
+          }),
+          catchError( error => of(false))
+        )
   }
 
 
@@ -102,11 +112,49 @@ export class UserService {
       role: this.user.role
     }
     
-    return this.http.put<ProfileForm>(`${this.base_url}/users/${this.userId}`, data, {
-      headers: {
-        'x-token': this.token
-      }
-    })
+    return this.http.put<ProfileForm>(`${this.base_url}/users/${this.userId}`, data, this.headers);
+  }
+
+
+/*===========================================================
+  CHANGE USER ROLE
+============================================================*/
+  changeUserRole( user: User) {
+
+    return this.http.put(`${this.base_url}/users/${user.id}`, user, this.headers);
+  }
+
+
+/*===========================================================
+  LOAD USERS
+============================================================*/
+  getUsers( from: number = 0): Observable<GetUsers> {
+    return this.http.get<GetUsers>(`${this.base_url}/users?from=${from}`, this.headers)
+              .pipe(
+                map( res => {
+                  
+                  //creamos una instancia de cada usuario del arreglo, tendremos todas sus propiedades a mano
+                  const users = res.users.map( 
+                    user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.image, user._id)
+                  );
+
+                  //mantenemos el tipado de la respuesta (tipo: GetUsers)
+                  return {
+                    ok: res.ok,
+                    total: res.total,
+                    users: users //mandamos los users instanciados
+                  };
+                })
+              )
+  }
+
+
+/*===========================================================
+  DELETE USER
+============================================================*/
+  deleteUser( user: User ) {
+    return this.http.delete(`${this.base_url}/users/${user.id}`, this.headers);
+    
   }
 
 
