@@ -125,9 +125,9 @@ export class UserService {
   }
 
 
-/*===========================================================
-  LOAD USERS
-============================================================*/
+/*=====================================================================
+  LOAD USERS - optendremos las images mediante una instancia de user
+=====================================================================*/
   getUsers( from: number = 0): Observable<GetUsers> {
     return this.http.get<GetUsers>(`${this.base_url}/users?from=${from}`, this.headers)
               .pipe(

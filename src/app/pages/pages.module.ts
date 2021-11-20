@@ -5,12 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
 //components
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PagesComponent} from "./pages.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { MedicsComponent } from './maintenance/medics/medics.component';
 
 
 
@@ -20,7 +23,9 @@ import { UsersComponent } from './maintenance/users/users.component';
     PagesComponent,
     AccountSettingsComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    HospitalsComponent,
+    MedicsComponent
   ],
   exports: [
     DashboardComponent,
@@ -31,6 +36,7 @@ import { UsersComponent } from './maintenance/users/users.component';
     CommonModule,
     SharedModule,
     ComponentsModule,
+    PipesModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule

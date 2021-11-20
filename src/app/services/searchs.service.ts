@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { Hospital } from '../models/hospital.model';
 
 
 
@@ -36,16 +37,16 @@ export class SearchsService {
 /*===========================================================
   TRANSFORM DATA
 ============================================================*/
-  private transformData( data: any[], total: number): User[] {
+  private transformUsers( data: any[], total: number): User[] {
     
     const datUser = data.map(
       user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.image, user._id)
-      );
-      
+      );   
       this.result = [datUser, total];
 
     return this.result;
   }
+
 
 
 /*===========================================================
@@ -59,9 +60,12 @@ export class SearchsService {
                     
                     switch (type) {
                       case 'users':
-                        return this.transformData( res.data, res.total );
+                        return this.transformUsers( res.data, res.total );
                        
-                    
+                      case 'hospitals':
+                        return res;
+                        
+                      
                       default:
                         return [];
                     }

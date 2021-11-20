@@ -24,9 +24,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   public termSearch: string = '';
   public loading: boolean = true;
 
-  //lista de obserbable a de-suscribirse
+  //lista de observable a de-suscribirse
   public listObservers$: Array<Subscription> = [];
-  
 
 
   constructor(private userService: UserService,
@@ -35,16 +34,16 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getUsers();
-
+    
     const observer1$ = this.modalImageService.newImageEvent
     //agregamos un delay pq refresca antes de que el server mande la imagen
         .pipe(
           delay(200)
         )
         .subscribe({
-          next: (image: any) => this.getUsers()        
+          next: (image: any) => this.getUsers()
         })
-    
+
     //guardamos los observables que vamos a de-suscribir
     this.listObservers$ = [observer1$];
   }
@@ -54,39 +53,39 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.listObservers$.forEach(u => u.unsubscribe());
   }
 
-  
+
   //METHODS:
   getUsers() {
     this.loading = true;
 
     this.userService.getUsers( this.from ).subscribe({
       next: ({users, total}) => {
-        
+
         this.users = users;
         this.usersTemp = users;
-        this.totalUsers = total; 
-        this.loading = false;      
+        this.totalUsers = total;
+        this.loading = false;
       }
     })
   }
 
 
   search( term: string ) {
-    //preparamos el termino de busqueda para usarlo en la paginación
+    //preparamos el término de búsqueda para usarlo en la paginación
     this.termSearch = term;
-    //si borra la busqueda vuelve a mostrar los users que estaban
+    //si borra la búsqueda vuelve a mostrar los users que estaban
     if (this.termSearch.length === 0) {
-      this.users = this.usersTemp;
+      this.getUsers();
       return;
     }
 
     this.searchService.search('users', term, this.from).subscribe({
       next: (res: any) => {
         this.users = res[0];
-        this.totalUsers = res[1]; 
+        this.totalUsers = res[1];
 
       }
-    }); 
+    });
   }
 
 
@@ -104,34 +103,35 @@ export class UsersComponent implements OnInit, OnDestroy {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          
+
           this.userService.deleteUser(user).subscribe({
-            
+
             next: res => {
               this.getUsers();
               // this.users = this.users.filter(m => m.id !== user.id);
-  
+
               Swal.fire('Usuario borrado', `${ user.name } ${ user.lastName }`, 'success');
             },
             error: err => Swal.fire('Error!!!', 'No se pudo borrar ese usuario.', 'error'),
-            
+
           });
         }
-      });  
-    } 
+      });
+    }
   }
 
-
+  //CHANGE USER ROLE
   changeUserRole( user: User) {
+    //TODO: que solo el admin pueda ver los select
     this.userService.changeUserRole(user).subscribe({
-      next: res => console.log(res)
-      
-    })   
+      next: res => res
+
+    })
   }
 
 
   openModal(user: User): void {
-    
+
     this.modalImageService.openModal('users', user.id!, user.image);
   }
 
@@ -145,13 +145,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.from -= value;
     }
 
-    //si no hay term usara el getUsers()
-    if (this.termSearch.length  === 0) {
-      this.getUsers();
-    } else {
-      this.search(this.termSearch);
-    }
-    
+    this.getUsers();
   }
 
 }

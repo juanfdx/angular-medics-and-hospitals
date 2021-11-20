@@ -7,6 +7,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { MedicsComponent } from './maintenance/medics/medics.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,9 @@ const routes: Routes = [
 
       //maintenance
       { path: 'users', component: UsersComponent, data: { title: 'Users'} },
+      { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitals'} },
+      { path: 'medics', component: MedicsComponent, data: { title: 'Medics'} },
+
 
     ]
   },
