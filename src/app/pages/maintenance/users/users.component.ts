@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   public termSearch: string = '';
   public loading: boolean = true;
 
+
   //lista de observable a de-suscribirse
   public listObservers$: Array<Subscription> = [];
 
@@ -31,6 +32,13 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService,
               private searchService: SearchsService,
               private modalImageService: ModalImageService) { }
+
+  
+  
+  public get user() : User {
+    return this.userService.user;
+  }
+  
 
   ngOnInit(): void {
     this.getUsers();
@@ -83,7 +91,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       next: (res: any) => {
         this.users = res[0];
         this.totalUsers = res[1];
-
       }
     });
   }

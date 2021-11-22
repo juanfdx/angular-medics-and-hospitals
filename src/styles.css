@@ -65,4 +65,13 @@ td {
   margin-left: calc(50% - 100px);
 }
 
-/* HOSPITALS */
+/* MEDIC */
+.padding-div-buttons {
+  padding: 0px 15px;
+}
+
+.medic-img {
+  width: 150px;
+  height: 150px;
+  margin-left: calc(50% - 100px);
+}

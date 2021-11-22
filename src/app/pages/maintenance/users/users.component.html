@@ -31,10 +31,11 @@
   <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Users ({{ totalUsers }})</h4>
+            <h4 class="card-title">Users ({{ totalUsers }}) - {{ user.role }}</h4>
             <h6 class="card-subtitle">Registered users</h6>
             <div class="table-responsive">
-                <table class="table table-bordered">
+
+                <table *ngIf="user.role === 'ADMIN_ROLE'" class="table table-bordered">
 
                     <thead>
                         <tr>
@@ -60,17 +61,16 @@
                               <select class="form-control" 
                                       [(ngModel)]="user.role"
                                       (change)="changeUserRole(user)">
-                                <option value="ADMIN_ROLE">Admin</option>
-                                <option value="USER_ROLE">User</option>
+                                <option value="ADMIN_ROLE">admin</option>
+                                <option value="USER_ROLE">user</option>
                               </select>
                             </td>
                             <td>
-                              <span *ngIf="user.role === 'ADMIN_ROLE'" class="label label-success">admin</span>
-                              <span *ngIf="user.role !== 'ADMIN_ROLE'" class="label label-danger">member</span>
+                              <span *ngIf="user.role === 'ADMIN_ROLE'" class="label label-success">active</span>
+                              <span *ngIf="user.role !== 'ADMIN_ROLE'" class="label label-danger">disabled</span>
                             </td>
 
                             <td class="text-nowrap td-center">
-                                <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
                                 
                                 <a class="cursor" data-toggle="tooltip" data-original-title="Delete"
                                    (click)="deleteUser(user)"> 
@@ -82,6 +82,45 @@
                     </tbody>
 
                 </table>
+
+                <table *ngIf="user.role !== 'ADMIN_ROLE'" class="table table-bordered">
+
+                  <thead>
+                      <tr>
+                          <th class="w100">Avatar</th>
+                          <th>Email</th>
+                          <th>Name</th>
+                          <th class="w100">Role</th>
+                          <th class="text-nowrap td-center w100">Status</th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      <tr *ngFor="let user of users">
+                          <td class="td-center">
+                            <img class="avatar cursor" 
+                                 [src]="user.imageUrl"
+                                 (click)="openModal(user)">
+                          </td>
+                          <td>{{ user.email }}</td>
+                          <td>{{ user.name }} {{ user.lastName }}</td>
+
+                          <td>
+                            <span *ngIf="user.role === 'ADMIN_ROLE'" >admin</span>
+                            <span *ngIf="user.role !== 'ADMIN_ROLE'" >member</span>
+                          </td>
+
+                          <td class="text-nowrap td-center">
+                              
+                            <span *ngIf="user.role === 'ADMIN_ROLE'" class="label label-success">active</span>
+                            <span *ngIf="user.role !== 'ADMIN_ROLE'" class="label label-danger">disabled</span>
+
+                          </td>
+                      </tr>                   
+                  </tbody>
+
+              </table>
+                
             </div>
 
             <div *ngIf="txtTerm.value.length === 0" class="d-flex justify-content-end">

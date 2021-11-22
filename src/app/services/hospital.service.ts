@@ -28,6 +28,7 @@ export class HospitalService {
     }
   }
 
+  
 //SERVICES:
 /*===========================================================
   GET HOSPITALS - optendremos las images mediante un pipe

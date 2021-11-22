@@ -9,6 +9,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { UsersComponent } from './maintenance/users/users.component';
 import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
 import { MedicsComponent } from './maintenance/medics/medics.component';
+import { MedicComponent } from './maintenance/medics/medic/medic.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent, data: { title: 'Users'} },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitals'} },
       { path: 'medics', component: MedicsComponent, data: { title: 'Medics'} },
+      { path: 'medic/:id', component: MedicComponent, data: { title: 'Medic'} },
+
 
 
     ]

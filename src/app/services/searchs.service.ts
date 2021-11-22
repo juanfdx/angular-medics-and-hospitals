@@ -65,7 +65,9 @@ export class SearchsService {
                       case 'hospitals':
                         return res;
                         
-                      
+                      case 'medics':
+                        return res;
+
                       default:
                         return [];
                     }

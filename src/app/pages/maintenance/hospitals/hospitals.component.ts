@@ -36,15 +36,13 @@ export class HospitalsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getHospitals();
 
-    //al detectar el emit que recarge la pagina para ver la imagen subida
+    //al detectar el emit, que recarge la pagina para ver la imagen subida
     const observer1$ = this.modalImageService.newImageEvent
-    //agregamos un delay pq refresca antes de que el server mande la imagen
-        .pipe(
-          delay(200)
-        )
-        .subscribe({
-          next: (image: any) => this.getHospitals()
-        })
+                           //agregamos un delay pq refresca antes de que el server mande la imagen
+                           .pipe(delay(200))
+                           .subscribe({
+                             next: (image: any) => this.getHospitals()
+                           })
 
     //guardamos los observables que vamos a de-suscribir
     this.listObservers$ = [observer1$];
@@ -119,7 +117,11 @@ export class HospitalsComponent implements OnInit, OnDestroy {
         })
       },
           
-      error: err => Swal.fire('Error!!!', 'No se pudo actualizar el hospital.', 'error')      
+      error: err => {
+        Swal.fire('Error!!!', 'No se pudo actualizar el hospital.', 'error'),
+        this.getHospitals()
+      }
+            
     });  
   }
 
@@ -171,11 +173,9 @@ export class HospitalsComponent implements OnInit, OnDestroy {
     }
 
     this.searchService.search('hospitals', term, this.from).subscribe({
-      next: (res: any) => {
-        
+      next: (res: any) => {    
         this.hospitals = res.data;
         this.totalHospitals = res.total;
-
       }
     });
   }

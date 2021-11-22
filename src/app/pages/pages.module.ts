@@ -14,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './maintenance/users/users.component';
 import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
 import { MedicsComponent } from './maintenance/medics/medics.component';
+import { MedicComponent } from './maintenance/medics/medic/medic.component';
 
 
 
@@ -25,7 +26,8 @@ import { MedicsComponent } from './maintenance/medics/medics.component';
     ProfileComponent,
     UsersComponent,
     HospitalsComponent,
-    MedicsComponent
+    MedicsComponent,
+    MedicComponent,
   ],
   exports: [
     DashboardComponent,
