@@ -39,6 +39,12 @@ export class UserService {
   }
 
   
+  public get role() : "ADMIN_ROLE" | "USER_ROLE" {
+    return this.user.role!;
+  }
+  
+
+  
   public get headers() : object {
     return {
       headers: {
@@ -50,6 +56,15 @@ export class UserService {
   
   
 //SERVICES:
+/*===========================================================
+  SAVE LOCALSTORAGE
+============================================================*/
+  saveLocalStorage( token: string, menu: any ) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  }
+
+
 /*===========================================================
   RENEW TOKEN
 ============================================================*/
@@ -67,7 +82,7 @@ export class UserService {
             //tambien podremos usar los metodos que tenga la clase user y siempre que
             //estemos en una pagina autenticada dispondremos de la informacion del user
             
-            localStorage.setItem('token', res.token);
+            this.saveLocalStorage(res.token, res.menu);
 
             return true;
           }),
@@ -83,7 +98,9 @@ export class UserService {
     return this.http.post(`${this.base_url}/login`, formData)
                 .pipe(
                   tap( (res: any) => {
-                    localStorage.setItem('token', res.token)         
+
+                    this.saveLocalStorage(res.token, res.menu);
+
                   })
                 )
   }
@@ -96,7 +113,9 @@ export class UserService {
     return this.http.post(`${this.base_url}/users`, formData)
               .pipe(
                 tap( (res: any) => {
-                  localStorage.setItem('token', res.token)         
+
+                 this.saveLocalStorage(res.token, res.menu);
+
                 })
               )
   }
@@ -162,7 +181,10 @@ export class UserService {
   LOGOUT
 ============================================================*/
   logout() {
+
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+
     this.router.navigateByUrl('/login');
   }
 

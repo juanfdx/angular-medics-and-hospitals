@@ -12,13 +12,14 @@ import { UserService } from 'src/app/services/user.service';
 export class SidebarComponent implements OnInit {
 
   public user!: User; 
-  public menuItems: any[] = [];
+  //no lo usamos pq ahora lo traemos directo del backend
+  // public menuItems: any[] = [];
 
-  constructor(private sidebarServices: SidebarService,
+  constructor(public sidebarServices: SidebarService,
               private userService: UserService) { 
 
     this.user = userService.user;
-    this.menuItems = this.sidebarServices.menu;
+    // this.menuItems = this.sidebarServices.menu;
   }
 
   ngOnInit(): void {

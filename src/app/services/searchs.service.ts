@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { Hospital } from '../models/hospital.model';
+import { Observable } from 'rxjs';
 
 
 
@@ -48,9 +49,16 @@ export class SearchsService {
   }
 
 
-
 /*===========================================================
-  SEARCH
+  GLOBAL SEARCH
+============================================================*/
+  globalSearch( term: string ): Observable<any> {
+    return this.http.get(`${this.base_url}/all/${term}`, this.headers)
+  }
+
+  
+/*===========================================================
+  SEARCH - by type
 ============================================================*/
   search( type: string, term: string, from: number = 0) {
 

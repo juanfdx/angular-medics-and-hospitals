@@ -10,7 +10,7 @@ export class User {
     public lastName: string,
     public email: string,
     public password?: string,
-    public role?: string,
+    public role?: 'ADMIN_ROLE' | 'USER_ROLE',
     public image?: string,
     public id?: string,
 
