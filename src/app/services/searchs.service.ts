@@ -41,7 +41,7 @@ export class SearchsService {
   private transformUsers( data: any[], total: number): User[] {
     
     const datUser = data.map(
-      user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.image, user._id)
+      user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.status, user.image, user._id)
       );   
       this.result = [datUser, total];
 

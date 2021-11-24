@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
 
             Swal.fire('Exito!!!', 'Usuario actualizado.', 'success')
           },
-          error: err => Swal.fire('Error!!!', err.error.msg, 'error')        
+          error: err => Swal.fire('Error!!!', 'No se pudo actualizar', 'error')        
           
         });
   }

@@ -11,6 +11,7 @@ export class User {
     public email: string,
     public password?: string,
     public role?: 'ADMIN_ROLE' | 'USER_ROLE',
+    public status?: 'active' | 'inactive',
     public image?: string,
     public id?: string,
 

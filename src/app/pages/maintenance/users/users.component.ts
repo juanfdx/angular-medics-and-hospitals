@@ -67,8 +67,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     this.userService.getUsers( this.from ).subscribe({
-      next: ({users, total}) => {
-
+      next: ({users, total}) => { 
         this.users = users;
         this.usersTemp = users;
         this.totalUsers = total;
@@ -127,12 +126,22 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   }
 
+
   //CHANGE USER ROLE
   changeUserRole( user: User) {
-    //TODO: que solo el admin pueda ver los select
-    this.userService.changeUserRole(user).subscribe({
+    this.userService.changeUserRoleStatus(user).subscribe({
       next: res => res
+    })
+  }
 
+
+  //CHANGE USER STATUS
+  changeUserStatus( user: User) {
+
+    (user.status === 'active') ? user.status = 'inactive' : user.status = 'active';
+    
+    this.userService.changeUserRoleStatus(user).subscribe({
+      next: res => res    
     })
   }
 

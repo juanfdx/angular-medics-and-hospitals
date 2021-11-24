@@ -10,7 +10,6 @@ export class SidebarService {
 
 
 
-
 /**
 * si no usaramos el menu que viene del backend por el localstorage
 */

@@ -118,7 +118,10 @@ export class MedicComponent implements OnInit {
               });
       
               this.router.navigateByUrl(`/dashboard/medic/${res.medic._id}`);
-            }          
+            },
+            
+            error: err => Swal.fire('Error!!!', err.error.msg, 'error')        
+            
           });
 
     //si no existe crea
@@ -136,7 +139,10 @@ export class MedicComponent implements OnInit {
           });
   
           this.router.navigateByUrl(`/dashboard/medics`);
-        }   
+        },
+        
+        error: err => Swal.fire('Error!!!', 'No se pudo crear el médico.', 'error')        
+        
       });
     }
     

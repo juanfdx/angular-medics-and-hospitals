@@ -118,7 +118,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
       },
           
       error: err => {
-        Swal.fire('Error!!!', 'No se pudo actualizar el hospital.', 'error'),
+        Swal.fire('Error!!!', err.error.msg, 'error'),
         this.getHospitals()
       }
             
@@ -151,7 +151,8 @@ export class HospitalsComponent implements OnInit, OnDestroy {
             })
           },
               
-          error: err => Swal.fire('Error!!!', 'No se pudo borrar el hospital.', 'error') 
+          error: err => Swal.fire('Error!!!', err.error.msg, 'error')
+                        
         });
       }
     });

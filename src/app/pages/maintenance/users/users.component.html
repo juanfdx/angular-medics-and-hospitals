@@ -31,7 +31,7 @@
   <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Users ({{ totalUsers }}) - {{ user.role }}</h4>
+            <h4 class="card-title">Users ({{ totalUsers }})</h4>
             <h6 class="card-subtitle">Registered users</h6>
             <div class="table-responsive">
 
@@ -65,9 +65,18 @@
                                 <option value="USER_ROLE">user</option>
                               </select>
                             </td>
+
                             <td>
-                              <span *ngIf="user.role === 'ADMIN_ROLE'" class="label label-success">active</span>
-                              <span *ngIf="user.role !== 'ADMIN_ROLE'" class="label label-danger">disabled</span>
+                              <button *ngIf="user.status === 'active'" 
+                                      class="btn btn-success btn-sm py-0"
+                                      (click)="changeUserStatus( user )">
+                                    {{ user.status }}
+                              </button>
+                              <button *ngIf="user.status != 'active'" 
+                                      class="btn btn-danger btn-sm py-0"
+                                      (click)="changeUserStatus( user )">
+                                    {{ user.status }}
+                              </button>
                             </td>
 
                             <td class="text-nowrap td-center">
@@ -107,13 +116,13 @@
 
                           <td>
                             <span *ngIf="user.role === 'ADMIN_ROLE'" >admin</span>
-                            <span *ngIf="user.role !== 'ADMIN_ROLE'" >member</span>
+                            <span *ngIf="user.role != 'ADMIN_ROLE'" >user</span>
                           </td>
 
                           <td class="text-nowrap td-center">
                               
-                            <span *ngIf="user.role === 'ADMIN_ROLE'" class="label label-success">active</span>
-                            <span *ngIf="user.role !== 'ADMIN_ROLE'" class="label label-danger">disabled</span>
+                            <span *ngIf="user.status === 'active'" class="label label-success">active</span>
+                            <span *ngIf="user.status != 'active'" class="label label-danger">inactive</span>
 
                           </td>
                       </tr>                   

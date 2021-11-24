@@ -43,7 +43,11 @@ export class UserService {
     return this.user.role!;
   }
   
-
+  
+  public get status() : 'active' | 'inactive' {
+    return this.user.status!;
+  }
+  
   
   public get headers() : object {
     return {
@@ -75,10 +79,10 @@ export class UserService {
         .pipe(
           map( (res:any) => {
             //destructuramos la res(es un user), para usar las propiedades en la instancia
-            const { name, lastName, email, role, image = '', _id } = res.user;
+            const { name, lastName, email, role, status, image = '', _id } = res.user;
 
             //creamos una instancia de usuario, y tendremos el usuario disponible en toda la app
-            this.user = new User(name, lastName, email, '', role, image, _id);
+            this.user = new User(name, lastName, email, '', role, status, image, _id);
             //tambien podremos usar los metodos que tenga la clase user y siempre que
             //estemos en una pagina autenticada dispondremos de la informacion del user
             
@@ -136,9 +140,9 @@ export class UserService {
 
 
 /*===========================================================
-  CHANGE USER ROLE
+  CHANGE USER ROLE OR STATUS
 ============================================================*/
-  changeUserRole( user: User) {
+  changeUserRoleStatus( user: User) {
 
     return this.http.put(`${this.base_url}/users/${user.id}`, user, this.headers);
   }
@@ -154,7 +158,7 @@ export class UserService {
                   
                   //creamos una instancia de cada usuario del arreglo, tendremos todas sus propiedades a mano
                   const users = res.users.map( 
-                    user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.image, user._id)
+                    user => new User(user.name, user.lastName, user.email, user.password = '', user.role, user.status, user.image, user._id)
                   );
 
                   //mantenemos el tipado de la respuesta (tipo: GetUsers)

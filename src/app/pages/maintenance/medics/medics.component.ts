@@ -86,7 +86,7 @@ export class MedicsComponent implements OnInit, OnDestroy {
 
             Swal.fire('Médico borrado', `${ medic.name } ${ medic.lastName }`, 'success');
           },
-          error: err => Swal.fire('Error!!!', 'No se pudo borrar ese médico.', 'error'),
+          error: err => Swal.fire('Error!!!', err.error.msg, 'error'),
 
         });
       }

@@ -72,7 +72,11 @@ export class ModalImageComponent implements OnInit {
             this.closeModal();
           },
               
-          error: err => Swal.fire('Error!!!', 'No se pudo subir la imagen!', 'error')               
+          error: err => {
+            Swal.fire('Error!!!', err.error.msg, 'error');
+            this.closeModal();
+            
+          }               
         });
   }
 
