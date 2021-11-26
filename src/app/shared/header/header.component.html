@@ -46,7 +46,7 @@
           <form (ngSubmit)="searchAll(txtTerm.value)" class="app-search">
             <input type="text" 
                    class="form-control" 
-                   placeholder="Search & enter"
+                   [placeholder]=" 'searchEnter' |translate "
                    #txtTerm> 
                    <a class="srh-btn"><i class="ti-close"></i></a> 
           </form>
@@ -60,17 +60,31 @@
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle waves-effect waves-dark" 
-             href="" data-toggle="dropdown" 
+             [ngClass]="{ 'show': langActive === 'en', 'hide': langActive !== 'en' }" 
+             data-toggle="dropdown" 
              aria-haspopup="true" 
              aria-expanded="false"> 
              <i class="flag-icon flag-icon-us"></i>
           </a>
-          
-          <div class="dropdown-menu dropdown-menu-right animated fadeIn fast"> 
-            <a class="dropdown-item" href="#">
+          <a  class="nav-link dropdown-toggle waves-effect waves-dark"
+              [ngClass]="{ 'show': langActive === 'es', 'hide': langActive !== 'es' }" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false"> 
               <i class="flag-icon flag-icon-es"></i> 
-              Spanish
+          </a>
+          <div class="dropdown-menu dropdown-menu-right animated fadeIn fast"> 
+
+            <a (click)="selectLanguage('en')" class="dropdown-item cursor">
+              <i class="flag-icon flag-icon-us"></i>
+              {{ 'English' | translate }}
             </a> 
+
+            <a (click)="selectLanguage('es')" class="dropdown-item cursor">
+              <i class="flag-icon flag-icon-es"></i> 
+              {{ 'Spanish' | translate }}
+            </a> 
+
           </div>
 
         </li>
@@ -89,15 +103,15 @@
                   <div class="u-text">
                     <h4>{{ user.name }} {{ user.lastName }}</h4>
                     <p class="text-muted">{{ user.email | slice:0:20 }}{{ (user.email.length > 20) ? '...' : '' }}</p>
-                    <a routerLink="profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                    <a routerLink="profile" class="btn btn-rounded btn-danger btn-sm">{{ 'viewProfile' | translate }}</a></div>
                 </div>
               </li>
               <li role="separator" class="divider"></li>
-              <li><a routerLink="profile" routerLinkActive="active"><i class="ti-user"></i> My Profile</a></li>          
+              <li><a routerLink="profile" routerLinkActive="active"><i class="ti-user"></i> &nbsp;{{ 'profile' | translate }}</a></li>          
               <li role="separator" class="divider"></li>
-              <li><a routerLink="account-settings"><i class="ti-settings"></i> Account Setting</a></li>
+              <li><a routerLink="account-settings"><i class="ti-settings"></i> &nbsp;{{ 'accountSetting' | translate }}</a></li>
               <li role="separator" class="divider"></li>
-              <li><a (click)="logout()" class="cursor"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li><a (click)="logout()" class="cursor"><i class="fa fa-power-off"></i> &nbsp;{{ 'logout' |translate }}</a></li>
             </ul>
           </div>
         </li>

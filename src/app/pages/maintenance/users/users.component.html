@@ -6,7 +6,7 @@
 
         <input type="text" 
                class="form-control" 
-               placeholder="Search user..."
+               [placeholder]=" 'Search user...' |translate "
                (keyup)="search(txtTerm.value)"
                #txtTerm>
 
@@ -19,9 +19,9 @@
   <div class="col-12">
 
     <div class="alert alert-info text-center" role="alert">
-      <h4 class="alert-heading">Loading</h4>
+      <h4 class="alert-heading">{{ 'Loading' | translate }}</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Please wait</p>
+      <p class="mb-0">{{ 'Please wait' | translate }}</p>
     </div>
 
   </div>
@@ -31,8 +31,8 @@
   <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Users ({{ totalUsers }})</h4>
-            <h6 class="card-subtitle">Registered users</h6>
+            <h4 class="card-title">{{ 'Users' | translate }} ({{ totalUsers }})</h4>
+            <h6 class="card-subtitle">{{ 'Registered users' | translate }}</h6>
             <div class="table-responsive">
 
                 <table *ngIf="user.role === 'ADMIN_ROLE'" class="table table-bordered">
@@ -40,11 +40,11 @@
                     <thead>
                         <tr>
                             <th class="w100">Avatar</th>
-                            <th>Email</th>
-                            <th>Name</th>
-                            <th class="w140">Role</th>
-                            <th class="w100">Status</th>
-                            <th class="text-nowrap td-center w100">Actions</th>
+                            <th>{{ 'Email' | translate }}</th>
+                            <th>{{ 'Name' | translate }}</th>
+                            <th class="w140">{{ 'Role' | translate }}</th>
+                            <th class="w100">{{ 'Status' | translate }}</th>
+                            <th class="text-nowrap td-center w100">{{ 'Actions' | translate }}</th>
                         </tr>
                     </thead>
 
@@ -61,8 +61,8 @@
                               <select class="form-control" 
                                       [(ngModel)]="user.role"
                                       (change)="changeUserRole(user)">
-                                <option value="ADMIN_ROLE">admin</option>
-                                <option value="USER_ROLE">user</option>
+                                <option value="ADMIN_ROLE">{{ 'admin' | translate }}</option>
+                                <option value="USER_ROLE">{{ 'user' | translate }}</option>
                               </select>
                             </td>
 
@@ -70,12 +70,12 @@
                               <button *ngIf="user.status === 'active'" 
                                       class="btn btn-success btn-sm py-0"
                                       (click)="changeUserStatus( user )">
-                                    {{ user.status }}
+                                    {{ user.status | translate}}
                               </button>
                               <button *ngIf="user.status != 'active'" 
                                       class="btn btn-danger btn-sm py-0"
                                       (click)="changeUserStatus( user )">
-                                    {{ user.status }}
+                                    {{ user.status! | translate}}
                               </button>
                             </td>
 
@@ -133,8 +133,8 @@
             </div>
 
             <div *ngIf="txtTerm.value.length === 0" class="d-flex justify-content-end">
-              <button (click)="pagination(-5)" class="btn btn-secondary mr-2">Prev</button>           
-              <button (click)="pagination(5)" class="btn btn-secondary">Next</button>
+              <button (click)="pagination(-5)" class="btn btn-secondary mr-2">{{ 'Prev' | translate }}</button>           
+              <button (click)="pagination(5)" class="btn btn-secondary">{{ 'Next' | translate }}</button>
             </div>
 
         </div>

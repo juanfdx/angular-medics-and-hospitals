@@ -16,6 +16,10 @@ import { HospitalsComponent } from './maintenance/hospitals/hospitals.component'
 import { MedicsComponent } from './maintenance/medics/medics.component';
 import { MedicComponent } from './maintenance/medics/medic/medic.component';
 import { SearchComponent } from './search/search.component';
+// import ngx-translate and the http loader
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 
@@ -43,7 +47,22 @@ import { SearchComponent } from './search/search.component';
     PipesModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+        defaultLanguage: 'es',
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    })
   ]
 })
 export class PagesModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../../assets/i18n/', '.json');
+}

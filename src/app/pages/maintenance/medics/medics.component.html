@@ -6,7 +6,7 @@
 
         <input type="text" 
                class="form-control" 
-               placeholder="Search medic..."
+               [placeholder]=" 'Search medic...' |translate "
                (keyup)="search(txtTerm.value)"
                #txtTerm>
 
@@ -20,9 +20,9 @@
   <div class="col-12">
 
     <div class="alert alert-info text-center" role="alert">
-      <h4 class="alert-heading">Loading</h4>
+      <h4 class="alert-heading">{{ 'Loading' | translate }}</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Please wait</p>
+      <p class="mb-0">{{ 'Please wait' | translate }}</p>
     </div>
 
   </div>
@@ -37,13 +37,14 @@
 
           <div class="row">
             <div class="col">           
-              <h4 class="card-title">Medics ({{ totalMedics }})</h4>
-              <h6 class="card-subtitle">Registered Medics</h6>
+              <h4 class="card-title">{{ 'Medics' | translate }} ({{ totalMedics }})</h4>
+              <h6 class="card-subtitle">{{ 'Registered Medics' | translate }}</h6>
             </div>
             <div class="col">
               <a class="btn btn-primary float-right"
                       routerLink="/dashboard/medic/new">
-                    Create Medic
+                    {{ 'Create medic' | translate }}
+
               </a>
             </div>
           </div>
@@ -53,10 +54,10 @@
 
                     <thead>
                         <tr>
-                            <th class="w100">Photo</th>
-                            <th>Name</th>
+                            <th class="w100">{{ 'Photo' | translate }}</th>
+                            <th>{{ 'Name' | translate }}</th>
                             
-                            <th class="text-nowrap td-center w100">Actions</th>
+                            <th class="text-nowrap td-center w100">{{ 'Actions' | translate }}</th>
                         </tr>
                     </thead>
 
@@ -94,8 +95,8 @@
             </div>
 
             <div *ngIf="txtTerm.value.length === 0" class="d-flex justify-content-end">
-              <button (click)="pagination(-5)" class="btn btn-secondary mr-2">Prev</button>           
-              <button (click)="pagination(5)" class="btn btn-secondary">Next</button>
+              <button (click)="pagination(-5)" class="btn btn-secondary mr-2">{{ 'Prev' | translate }}</button>           
+              <button (click)="pagination(5)" class="btn btn-secondary">{{ 'Next' | translate }}</button>
             </div>
 
         </div>

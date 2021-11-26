@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageError404Component implements OnInit {
 
+  public year: number = new Date().getFullYear();
+
   constructor() { }
 
   ngOnInit(): void {

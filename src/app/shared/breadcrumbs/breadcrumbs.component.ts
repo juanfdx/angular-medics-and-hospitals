@@ -16,7 +16,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router) { 
     this.titleSubs$ = this.getDataRoutes().subscribe( ({ title }) => {
-     
+      console.log(title);
+      
         this.title = title;
         //titulo de la pagina
         document.title = `Medics & Hospitals - ${ title }`;

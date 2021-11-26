@@ -14,9 +14,9 @@
             <span class="hide-menu"> {{ user.name }} {{ user.lastName }}</span>
           </a>
           <ul aria-expanded="false" class="collapse">
-            <li><a routerLink="profile" routerLinkActive="active">My Profile </a></li>   
-            <li><a routerLink="account-settings" routerLinkActive="active">Account Setting</a></li>
-            <li><a (click)="logout()" class="cursor">Logout</a></li>
+            <li><a routerLink="profile" routerLinkActive="active">{{ 'profile' | translate }}</a></li>   
+            <li><a routerLink="account-settings" routerLinkActive="active">{{ 'accountSetting' | translate }}</a></li>
+            <li><a (click)="logout()" class="cursor">{{ 'logout' |translate }}</a></li>
           </ul>
         </li>
 
@@ -25,7 +25,7 @@
         <li *ngFor="let item of sidebarServices.menu"> 
           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
             <i [class]="item.icon"></i>
-            <span class="hide-menu">{{ item.title }} 
+            <span class="hide-menu">{{ item.title | translate}} 
               <span class="label label-rouded label-themecolor pull-right">{{ item.submenu.length }}</span>
             </span>
           </a>
@@ -34,7 +34,7 @@
               <a [routerLink]="subMenuItem.url" 
                  routerLinkActive="active"
                  [routerLinkActiveOptions]="{ exact: true }">
-                 {{ subMenuItem.title }} 
+                 {{ subMenuItem.title | translate }} 
                 </a>
             </li>
           </ul>

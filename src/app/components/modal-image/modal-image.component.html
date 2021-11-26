@@ -11,7 +11,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1">Load image</h4>
+                <h4 class="modal-title" id="exampleModalLabel1">{{ 'Load image' | translate }}</h4>
                 <button type="button" 
                         class="close" 
                         data-dismiss="modal" 
@@ -22,7 +22,7 @@
             </div>
             <div class="modal-body">
 
-              <h3>Select image</h3>
+              <h3>{{ 'Select image' | translate }}</h3>
               
               <img class="modal-img" *ngIf="!imageTemp" [src]="modalImageService.image" >
               <!-- se muestra la nueva imagen temporal a guardar si existe -->
@@ -41,12 +41,12 @@
                         class="btn btn-default" 
                         data-dismiss="modal"
                         (click)="closeModal()">
-                      Cancel
+                      {{ 'Cancel' | translate }}
                 </button>
                 <button type="button" 
                         class="btn btn-primary"
                         (click)="updateImage()">
-                      Update
+                      {{ 'Update' | translate }}
                 </button>
             </div>
         </div>

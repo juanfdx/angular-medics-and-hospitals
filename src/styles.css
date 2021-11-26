@@ -75,3 +75,8 @@ td {
   height: 150px;
   margin-left: calc(50% - 100px);
 }
+
+/* HEADER */
+.show {
+  display: block;
+}
