@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+
 import { SidebarService } from 'src/app/services/sidebar.service';
+import { ToggleMenuService } from 'src/app/services/toggle-menu.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -17,7 +19,8 @@ export class SidebarComponent implements OnInit {
   // public menuItems: any[] = [];
 
   constructor(public sidebarServices: SidebarService,
-              private userService: UserService) { 
+              private userService: UserService,
+              private toggleMenuService: ToggleMenuService) { 
 
     this.user = userService.user;
     // this.menuItems = this.sidebarServices.menu;
@@ -27,6 +30,15 @@ export class SidebarComponent implements OnInit {
   }
 
   //Methods:
+  //esconde el menu navbar para moviles
+  collapse() {
+    let body = document.body;
+    body.classList.remove("show-sidebar");
+    
+    this.toggleMenuService.toggleMenuEvent.emit('toggle');
+  }
+
+
   logout() {
     this.userService.logout();
   }

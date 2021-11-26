@@ -61,11 +61,6 @@ export class MedicsComponent implements OnInit, OnDestroy {
     })
   }
 
-  
-  createMedic(){
-
-  }
-
 
   deleteMedic( medic: Medic ): void {
 

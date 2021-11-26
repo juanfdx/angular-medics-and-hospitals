@@ -3,9 +3,11 @@ import { Hospital } from 'src/app/models/hospital.model';
 import Swal from 'sweetalert2';
 import { Subscription, delay } from 'rxjs';
 
+
 import { HospitalService } from 'src/app/services/hospital.service';
 import { ModalImageService } from 'src/app/services/modal-image.service';
 import { SearchsService } from 'src/app/services/searchs.service';
+import { capitalize } from '../../../helpers/capitalize';
 
 
 
@@ -82,7 +84,10 @@ export class HospitalsComponent implements OnInit, OnDestroy {
     
     if (value !== undefined) {    
       if (value.trim().length > 0) {
-        this.hospitalService.createHospital(value!).subscribe({
+        //ponemos en mayusculas la primera letra de cada palabra del string
+        const valueCapitalized = capitalize(value);
+
+        this.hospitalService.createHospital(valueCapitalized!).subscribe({
           next: res => {
             
             Swal.fire({
@@ -105,7 +110,10 @@ export class HospitalsComponent implements OnInit, OnDestroy {
 
 
   updateHospital(hospital: Hospital): void {
-    this.hospitalService.updateHospital(hospital._id, hospital.name).subscribe({
+
+    const nameCapitalized = capitalize(hospital.name);
+
+    this.hospitalService.updateHospital(hospital._id, nameCapitalized).subscribe({
 
       next: res => {
         Swal.fire({
@@ -118,7 +126,7 @@ export class HospitalsComponent implements OnInit, OnDestroy {
       },
           
       error: err => {
-        Swal.fire('Error!!!', err.error.msg, 'error'),
+        Swal.fire('Error!!!', 'No se pudo actualizar', 'error'),
         this.getHospitals()
       }
             

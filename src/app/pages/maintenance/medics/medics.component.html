@@ -69,7 +69,7 @@
                                  [alt]="medic.name"
                                  (click)="openModal(medic)">
                           </td>
-                          <td>{{ medic.name }} {{ medic.lastName }}</td>
+                          <td>{{ medic.name | titlecase}} {{ medic.lastName | titlecase }}</td>
 
                             <td class="text-nowrap td-center">
 

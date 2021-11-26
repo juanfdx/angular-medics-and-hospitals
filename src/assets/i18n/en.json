@@ -50,5 +50,7 @@
   "active": "active",
   "inactive": "inactive",
   "Prev": "Prev",
-  "Next": "Next"
+  "Next": "Next",
+  "Light sidebar": "Light sidebar",
+  "Dark sidebar": "Dark sidebar"
 }

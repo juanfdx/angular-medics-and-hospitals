@@ -56,7 +56,7 @@ td {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .modal-img, .profile-img {
@@ -79,4 +79,27 @@ td {
 /* HEADER */
 .show {
   display: block;
+}
+
+/* DASHBOARD */
+.img-dashboard {
+  width: 300px;
+}
+
+@media (min-width: 1200px){
+  .img-dashboard {
+    width: 400px;
+  }
+}
+
+@media (max-width: 768px){
+  .img-dashboard {
+    width: 250px;
+  }
+}
+
+@media (max-width: 576px){
+  .img-dashboard {
+    width: 300px;
+  }
 }
